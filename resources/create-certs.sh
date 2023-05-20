@@ -1,7 +1,7 @@
 #!/bin/sh
 #see https://docs.docker.com/engine/security/https/
 
-EXPIRATIONDAYS=700
+EXPIRATIONDAYS="${CERT_EXPIRATION_DAYS:-700}"
 CASUBJSTRING="/C=BR/ST=RS/L=POA/O=Company/OU=IT/CN=example.com/emailAddress=test@example.com"
 
 while [[ $# -gt 1 ]]
