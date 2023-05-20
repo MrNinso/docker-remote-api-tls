@@ -19,14 +19,15 @@ version: "3.4"
 services:
   remote-api:
     <<: *sharedConfig
-    image: fernandosilva/docker-remote-api-tls  
+    build: . 
     ports:
-     - 2376:443
+     - "${PORT}:443"
     environment:
-     - CREATE_CERTS_WITH_PW=supersenha
-     - CERT_HOSTNAME=remote-api.example.com
+     - CREATE_CERTS_WITH_PW=${CREATE_CERTS_WITH_PW}
+     - CERT_HOSTNAME=${CERT_HOSTNAME}
+     - CERT_EXPIRATION_DAYS=${CERT_EXPIRATION_DAYS}
     volumes:
-     - ./certs:/data/certs
+     - "${CERT_PATH}:/data/certs"
      - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
       <<: *sharedDeployConfig
